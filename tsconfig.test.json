@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "types": ["jest"],
+    "jsx": "react",
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": false
+  },
+  "include": ["src", "__tests__"]
+}

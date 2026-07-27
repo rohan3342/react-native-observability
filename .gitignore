@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+
+# Generated API reference (run `pnpm docs:api` to regenerate; not committed —
+# it goes stale and bloats the repo). CI may publish it to GitHub Pages.
+docs/api
+
+.claude
+.cursor
+

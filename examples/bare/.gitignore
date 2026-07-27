@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+
+# native build artifacts
+/ios/Pods/
+/ios/build/
+/android/.gradle/
+/android/build/
+/android/app/build/
+*.keystore
+!debug.keystore
+
+# Metro
+.metro-health-check*
+metro.config.js.bak
+
+# misc
+.DS_Store
+*.tsbuildinfo
+npm-debug.*
+yarn-error.*
+
+# generated native folders (run `npx @react-native-community/cli init` to scaffold)
+/ios
+/android

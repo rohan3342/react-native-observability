@@ -1,0 +1,3 @@
+packages:
+  - '.' # The library
+  - 'examples/*' # Demo apps: examples/expo (Expo Go subset) + examples/bare (full surface)

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/index.ts",
+    "src/adapters/index.ts",
+    "src/storage/index.ts",
+    "src/panel/index.ts",
+    "src/observers/axios/index.ts",
+    "src/observers/fetch/index.ts",
+    "src/observers/graphql/index.ts",
+    "src/observers/react-navigation/index.ts",
+    "src/observers/react-query/index.ts",
+    "src/observers/trpc/index.ts",
+    "src/observers/apollo/index.ts",
+    "src/observers/urql/index.ts",
+    "src/observers/rtk-query/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "tsconfig": "tsconfig.json",
+  "readme": "none",
+  "name": "react-native-observability",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "skipErrorChecking": true,
+  "githubPages": false,
+  "sort": ["source-order"],
+  "intentionallyNotExported": [
+    "ThrottleState",
+    "ApolloObservableLike",
+    "ApolloOperationLike",
+    "ApolloForward",
+    "TRPCObservableLike",
+    "TRPCLinkRuntime",
+    "UrqlOperationLike",
+    "UrqlResultLike",
+    "RTKQueryActionLike",
+    "MinimalNavigationRef",
+    "MinimalQueryClient",
+    "ConsoleLike",
+    "HermesLike",
+    "State"
+  ],
+  "externalSymbolLinkMappings": {
+    "typescript": {
+      "AbortSignal": "https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal"
+    },
+    "react-native-observability": {
+      "Logger.write": "https://github.com/rohan3342/react-native-observability",
+      "loadOptionalPeer": "https://github.com/rohan3342/react-native-observability",
+      "NetworkLogStore": "https://github.com/rohan3342/react-native-observability",
+      "useTheme": "https://github.com/rohan3342/react-native-observability",
+      "AppearanceLike.getColorScheme": "https://github.com/rohan3342/react-native-observability"
+    }
+  },
+  "navigationLinks": {
+    "GitHub": "https://github.com/rohan3342/react-native-observability",
+    "npm": "https://www.npmjs.com/package/react-native-observability"
+  }
+}

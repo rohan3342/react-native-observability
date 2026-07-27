@@ -1,0 +1,327 @@
+{
+  "name": "react-native-observability",
+  "version": "0.1.0",
+  "description": "Production-grade observability and debugging toolkit for React Native with structured logging, error boundaries, on-device debug panel, and zero forced dependencies.",
+  "author": "Rohan Kumar Singh <rosingh3342@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rohan3342/react-native-observability.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./adapters": {
+      "types": "./dist/adapters/index.d.ts",
+      "import": "./dist/adapters/index.mjs",
+      "require": "./dist/adapters/index.js"
+    },
+    "./storage": {
+      "types": "./dist/storage/index.d.ts",
+      "import": "./dist/storage/index.mjs",
+      "require": "./dist/storage/index.js"
+    },
+    "./panel": {
+      "types": "./dist/panel/index.d.ts",
+      "react-native": "./dist/panel/index.mjs",
+      "import": "./dist/panel/index.mjs",
+      "require": "./dist/panel/index.js"
+    },
+    "./observers/axios": {
+      "types": "./dist/observers/axios.d.ts",
+      "import": "./dist/observers/axios.mjs",
+      "require": "./dist/observers/axios.js"
+    },
+    "./observers/fetch": {
+      "types": "./dist/observers/fetch.d.ts",
+      "import": "./dist/observers/fetch.mjs",
+      "require": "./dist/observers/fetch.js"
+    },
+    "./observers/graphql": {
+      "types": "./dist/observers/graphql.d.ts",
+      "import": "./dist/observers/graphql.mjs",
+      "require": "./dist/observers/graphql.js"
+    },
+    "./observers/react-navigation": {
+      "types": "./dist/observers/react-navigation.d.ts",
+      "import": "./dist/observers/react-navigation.mjs",
+      "require": "./dist/observers/react-navigation.js"
+    },
+    "./observers/react-query": {
+      "types": "./dist/observers/react-query.d.ts",
+      "import": "./dist/observers/react-query.mjs",
+      "require": "./dist/observers/react-query.js"
+    },
+    "./observers/trpc": {
+      "types": "./dist/observers/trpc.d.ts",
+      "import": "./dist/observers/trpc.mjs",
+      "require": "./dist/observers/trpc.js"
+    },
+    "./observers/apollo": {
+      "types": "./dist/observers/apollo.d.ts",
+      "import": "./dist/observers/apollo.mjs",
+      "require": "./dist/observers/apollo.js"
+    },
+    "./observers/urql": {
+      "types": "./dist/observers/urql.d.ts",
+      "import": "./dist/observers/urql.mjs",
+      "require": "./dist/observers/urql.js"
+    },
+    "./observers/rtk-query": {
+      "types": "./dist/observers/rtk-query.d.ts",
+      "import": "./dist/observers/rtk-query.mjs",
+      "require": "./dist/observers/rtk-query.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:watch": "tsup --watch",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "typecheck": "tsc --noEmit",
+    "typecheck:test": "tsc -p tsconfig.test.json --noEmit",
+    "typecheck:examples": "pnpm --filter ./examples/expo --filter ./examples/bare run typecheck",
+    "typecheck:all": "pnpm typecheck && pnpm typecheck:test && pnpm typecheck:examples",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\" \"examples/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"src/**/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\" \"examples/**/*.{ts,tsx}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\" \"examples/**/*.{ts,tsx,js,json}\" \"examples/**/*.md\" \"docs/**/*.md\" \"*.{json,md,mjs,ts}\"",
+    "spell": "cspell --no-progress \"src/**/*.{ts,tsx}\" \"__tests__/**/*.{ts,tsx}\" \"examples/**/*.{ts,tsx,md}\" \"docs/**/*.md\"",
+    "size": "size-limit",
+    "docs:api": "typedoc",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "changeset:publish": "pnpm build && pnpm test && changeset publish",
+    "prepublishOnly": "pnpm build && pnpm test && pnpm size",
+    "prepare": "husky"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0 <20.0.0",
+    "react-native": ">=0.73.0 <1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react-native-mmkv": {
+      "optional": true
+    },
+    "react-native-safe-area-context": {
+      "optional": true
+    },
+    "axios": {
+      "optional": true
+    },
+    "@react-navigation/native": {
+      "optional": true
+    },
+    "@tanstack/react-query": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.0",
+    "@size-limit/preset-small-lib": "^11.1.0",
+    "@testing-library/react-native": "^12.9.0",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.28",
+    "@types/react-test-renderer": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
+    "cspell": "^8.17.0",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-boundaries": "^5.0.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "jest": "^29.7.0",
+    "prettier": "^3.8.3",
+    "react": "18.3.1",
+    "react-native": "0.74.0",
+    "react-test-renderer": "18.3.1",
+    "size-limit": "^11.1.0",
+    "ts-jest": "^29.4.9",
+    "tsup": "^8.5.1",
+    "typedoc": "^0.28.19",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.59.0"
+  },
+  "size-limit": [
+    {
+      "name": "core (.)",
+      "path": "dist/index.mjs",
+      "import": "{ createLogger, Logger, LogLevel }",
+      "limit": "8 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "primitives (.)",
+      "path": "dist/index.mjs",
+      "import": "{ createHttpObserver, trackScreen, trackAsyncOperation }",
+      "limit": "3.75 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "adapters",
+      "path": "dist/adapters/index.mjs",
+      "import": "{ createCustomAdapter }",
+      "limit": "4 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "@sentry/react-native",
+        "@react-native-firebase/crashlytics",
+        "posthog-react-native"
+      ]
+    },
+    {
+      "name": "storage",
+      "path": "dist/storage/index.mjs",
+      "import": "{ createStorage, initSessionManager, getCurrentSessionId, getSessions, endCurrentSession }",
+      "limit": "4 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "react-native-mmkv"
+      ]
+    },
+    {
+      "name": "panel",
+      "path": "dist/panel/index.mjs",
+      "import": "{ DebugPanelProvider, useDebugPanel }",
+      "limit": "31 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "react-native-mmkv",
+        "react-native-safe-area-context"
+      ]
+    },
+    {
+      "name": "observers/axios",
+      "path": "dist/observers/axios.mjs",
+      "import": "{ observeAxios }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "axios"
+      ]
+    },
+    {
+      "name": "observers/fetch",
+      "path": "dist/observers/fetch.mjs",
+      "import": "{ observeFetch }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "observers/graphql",
+      "path": "dist/observers/graphql.mjs",
+      "import": "{ observeGraphQL }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "observers/react-navigation",
+      "path": "dist/observers/react-navigation.mjs",
+      "import": "{ observeReactNavigation, useScreenTracker }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "@react-navigation/native"
+      ]
+    },
+    {
+      "name": "observers/react-query",
+      "path": "dist/observers/react-query.mjs",
+      "import": "{ observeReactQuery }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native",
+        "@tanstack/react-query"
+      ]
+    },
+    {
+      "name": "observers/trpc",
+      "path": "dist/observers/trpc.mjs",
+      "import": "{ observeTRPC }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "observers/apollo",
+      "path": "dist/observers/apollo.mjs",
+      "import": "{ observeApollo }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "observers/urql",
+      "path": "dist/observers/urql.mjs",
+      "import": "{ observeUrql }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    },
+    {
+      "name": "observers/rtk-query",
+      "path": "dist/observers/rtk-query.mjs",
+      "import": "{ observeRTKQuery }",
+      "limit": "2 KB",
+      "ignore": [
+        "react",
+        "react-native"
+      ]
+    }
+  ],
+  "keywords": [
+    "react-native",
+    "logging",
+    "debugging",
+    "observability",
+    "monitoring"
+  ],
+  "packageManager": "pnpm@10.33.1+sha512.05ba3c1d5d1c18f68df06470d74055e62d41fc110a0c660db1b2dfb2785327f04cf0f68345d4609bc52089e7fa0343c31593b2f9594e2c5d5da426230acc9820"
+}

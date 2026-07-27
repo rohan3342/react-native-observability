@@ -1,0 +1,80 @@
+name: Release
+
+# Runs on every push to main.
+#  - If pending changesets exist: opens/updates a "Version Packages" PR.
+#  - If none exist (i.e. that PR was just merged and package.json is bumped):
+#    creates and pushes a `v<version>` tag, which triggers publish.yml.
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  version:
+    name: Open/update version PR
+    runs-on: ubuntu-latest
+    outputs:
+      hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Create or update version PR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset:version
+          title: "chore: version packages"
+          commit: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  tag:
+    name: Tag released version
+    needs: version
+    if: needs.version.outputs.hasChangesets == 'false'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Use a PAT so the pushed tag triggers publish.yml.
+          # Pushes made with the default GITHUB_TOKEN do NOT trigger other workflows.
+          token: ${{ secrets.RELEASE_TOKEN }}
+
+      - name: Create and push tag if missing
+        run: |
+          set -euo pipefail
+          VERSION="v$(node -p "require('./package.json').version")"
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "Tag $VERSION already exists; nothing to do."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$VERSION" -m "Release $VERSION"
+          git push origin "$VERSION"
+          echo "Created and pushed $VERSION"

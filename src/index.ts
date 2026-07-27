@@ -5,6 +5,7 @@
  * Transport-based structured logger, observability adapters, error boundaries,
  * and an on-device debug panel — all with zero forced dependencies.
  *
+ * Fully automated release pipeline with GitHub Actions + Changesets.
  * @packageDocumentation
  */
 

@@ -169,45 +169,48 @@ export function MyScreen() {
 
 ## Architecture
 
-```mermaid
-graph TD
-    A["Application Code<br/>Logging • Navigation<br/>HTTP Requests"]
-
-    A -->|Entry| B["Logger Core<br/>Hot Path<br/>Filtering • Redaction<br/>Sampling • Rate-limiting"]
-
-    B -->|Dispatch| C["Transports<br/>Write Destinations"]
-    B -->|Queue| D["Adapters<br/>Async • Isolated"]
-    B -->|Feed| E["Integrations<br/>Event Stores"]
-
-    C -->|Console| F["Console Output"]
-    C -->|Memory| G["Memory Transport<br/>Ring Buffer"]
-    C -->|MMKV| H["MMKV Transport<br/>Persistent Storage"]
-
-    D -->|Deferred| I["Error Handling"]
-    I -->|Captured| J["Remote Backends<br/>Sentry • Datadog"]
-
-    E -->|Network| K["HTTP Store"]
-    E -->|Screen| L["Screen Store"]
-    E -->|Timeline| M["Breadcrumb Store"]
-    E -->|Performance| N["Performance Store"]
-
-    G -->|Subscribe| O["Debug Panel"]
-    H -->|Query| O
-    K -->|Subscribe| O
-    L -->|Subscribe| O
-    M -->|Subscribe| O
-    N -->|Subscribe| O
-
-    O -->|Render| P["Live UI<br/>Logs • Network • State<br/>Navigation • Performance • Settings"]
-
-    style A fill:#f5f5f5,stroke:#424242,stroke-width:2px,color:#212121
-    style B fill:#e8eaf6,stroke:#3f51b5,stroke-width:2px,color:#212121
-    style C fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#212121
-    style D fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#212121
-    style E fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#212121
-    style J fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#212121
-    style O fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#212121
-    style P fill:#e0f2f1,stroke:#00796b,stroke-width:2px,color:#212121
+```text
+               ┌───────────────────────────────────┐
+               │         Application Code          │
+               │    Logging · Navigation · HTTP    │
+               └─────────────────┬─────────────────┘
+                                 │
+                                 ▼ entry
+               ┌─────────────────┴─────────────────┐
+               │            Logger Core            │
+               │            (hot path)             │
+               │     filter · redact · sample      │
+               └─────────────────┬─────────────────┘
+                                 │
+           ┌─────────────────────┼─────────────────────┐
+        dispatch               queue                  feed
+           │                     │                     │
+           ▼                     ▼                     ▼
+  ┌────────────────┐    ┌────────────────┐    ┌────────────────┐
+  │   Transports   │    │    Adapters    │    │  Integrations  │
+  │                │    │ async·isolated │    │  event stores  │
+  └────────────────┘    └────────────────┘    └────────────────┘
+           │                     │                     │
+           ▼                     ▼                     ▼
+  ┌────────────────┐    ┌────────────────┐    ┌────────────────┐
+  │ Console output │    │Remote backends │    │ HTTP · Screen  │
+  │ Memory (ring)  │    │ Sentry·Datadog │    │Breadcrumb·Perf │
+  │ MMKV (persist) │    │                │    │                │
+  └────────────────┘    └────────────────┘    └────────────────┘
+           │                                           │
+           └─────────────────────┬─────────────────────┘
+                         subscribe · query
+                                 │
+                                 ▼
+               ┌─────────────────┴─────────────────┐
+               │            Debug Panel            │
+               └─────────────────┬─────────────────┘
+                                 │
+                                 ▼ render
+               ┌─────────────────┴─────────────────┐
+               │              Live UI              │
+               │Logs · Network · State · Nav · Perf│
+               └───────────────────────────────────┘
 ```
 
 **Data flow:**

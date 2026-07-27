@@ -3,6 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![npm](https://img.shields.io/npm/v/react-native-observability.svg)](https://www.npmjs.com/package/react-native-observability)
 [![types: TypeScript](https://img.shields.io/badge/types-TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![Release CI](https://github.com/rohan3342/react-native-observability/actions/workflows/release.yml/badge.svg)](https://github.com/rohan3342/react-native-observability/actions/workflows/release.yml)
 
 A production-grade, provider-agnostic observability and debugging toolkit for React Native. Structured logging, optional remote backends, crash capture, PII redaction, on-device debug panel, and first-party integrations for HTTP clients and navigation — all with **zero forced runtime dependencies**.
 

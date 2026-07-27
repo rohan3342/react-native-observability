@@ -1,6 +1,6 @@
 {
   "name": "react-native-observability",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Production-grade observability and debugging toolkit for React Native with structured logging, error boundaries, on-device debug panel, and zero forced dependencies.",
   "author": "Rohan Kumar Singh <rosingh3342@gmail.com>",
   "license": "MIT",

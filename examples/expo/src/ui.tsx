@@ -92,13 +92,7 @@ export function Hero({
         <Text style={s(t).heroTitle}>{title}</Text>
       </View>
       <Text style={s(t).heroSubtitle}>{subtitle}</Text>
-      <Button
-        label={cta}
-        icon="observability-outline"
-        variant="primary"
-        wide
-        onPress={onPressCta}
-      />
+      <Button label={cta} icon="eye" variant="primary" wide onPress={onPressCta} />
     </View>
   );
 }

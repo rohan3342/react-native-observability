@@ -32,6 +32,8 @@ Displays all captured log entries. Features:
 - **Search** — search by message, context keys
 - **Export** — copy or share logs
 
+<img src="../assets/panel-logs-1.png" width="280" alt="Logs tab showing structured entries" /> <img src="../assets/panel-logs-2.png" width="280" alt="Logs tab with filters applied" />
+
 ```ts
 <DebugPanelProvider
   logSource={memoryTransport}
@@ -49,6 +51,8 @@ Displays all HTTP requests. Features:
 - **Request/response inspection** — view headers and bodies (redacted)
 - **Export** — copy HAR or JSON
 
+<img src="../assets/panel-network-1.png" width="280" alt="Network tab with HTTP requests" /> <img src="../assets/panel-network-2.png" width="280" alt="Network tab request details" />
+
 ```ts
 <DebugPanelProvider
   networkSource={http.store}
@@ -59,6 +63,8 @@ Displays all HTTP requests. Features:
 ### State Tab
 
 Display app state slices and feature flags. Pass app-provided state:
+
+<img src="../assets/panel-state-1.png" width="280" alt="State tab with JSON inspection" />
 
 ```ts
 <DebugPanelProvider
@@ -72,6 +78,8 @@ The panel displays state as JSON with syntax highlighting.
 ### Navigation Tab
 
 Displays screen stack and transitions. Automatically populated by `observeReactNavigation()`:
+
+<img src="../assets/panel-navigation-1.png" width="280" alt="Navigation tab showing screen stack" />
 
 ```ts
 observeReactNavigation(navRef, { logger });
@@ -102,6 +110,8 @@ Display and control:
 - **Storage** — clear all logs and storage
 - **Health** — internal metrics (queue depth, dropped entries, etc.)
 - **Timeline** — breadcrumb crash trail (if configured)
+
+<img src="../assets/panel-settings-1.png" width="280" alt="Settings tab appearance controls" /> <img src="../assets/panel-settings-2.png" width="280" alt="Settings tab storage and health metrics" />
 
 ## Opening the Panel
 
@@ -313,6 +323,8 @@ The Network tab's **Rules** section lets you create, edit, toggle, and delete mo
 ### Rule Details editor
 
 Tapping a rule row (or **+ Add rule**) opens the Rule Details editor — a sectioned form inspired by Android Studio's Network Inspector:
+
+<img src="../assets/panel-network-rules-1.png" width="280" alt="Network rules editor" /> <img src="../assets/panel-network-rules-2.png" width="280" alt="Network rules configuration" />
 
 | Section | What it contains |
 |---|---|

@@ -7,6 +7,8 @@
 
 A production-grade, provider-agnostic observability and debugging toolkit for React Native. Structured logging, optional remote backends, crash capture, PII redaction, on-device debug panel, and first-party integrations for HTTP clients and navigation — all with **zero forced runtime dependencies**.
 
+<img src="./docs/assets/preview.gif" alt="Demo" height="600" />
+
 ```bash
 npm install react-native-observability
 ```

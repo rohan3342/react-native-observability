@@ -32,6 +32,8 @@ Displays all captured log entries. Features:
 - **Search** — search by message, context keys
 - **Export** — copy or share logs
 
+<img src="assets/panel-logs-1.png" width="280" alt="Logs tab showing structured entries" /> <img src="assets/panel-logs-2.png" width="280" alt="Logs tab with filters applied" />
+
 ```ts
 <DebugPanelProvider
   logSource={memoryTransport}
@@ -49,6 +51,8 @@ Displays all HTTP requests. Features:
 - **Request/response inspection** — view headers and bodies (redacted)
 - **Export** — copy HAR or JSON
 
+<img src="assets/panel-network-1.png" width="280" alt="Network tab with HTTP requests" /> <img src="assets/panel-network-2.png" width="280" alt="Network tab request details" />
+
 ```ts
 <DebugPanelProvider
   networkSource={http.store}
@@ -59,6 +63,8 @@ Displays all HTTP requests. Features:
 ### State Tab
 
 Display app state slices and feature flags. Pass app-provided state:
+
+<img src="assets/panel-state-1.png" width="280" alt="State tab with JSON inspection" />
 
 ```ts
 <DebugPanelProvider
@@ -72,6 +78,8 @@ The panel displays state as JSON with syntax highlighting.
 ### Navigation Tab
 
 Displays screen stack and transitions. Automatically populated by `observeReactNavigation()`:
+
+<img src="assets/panel-navigation-1.png" width="280" alt="Navigation tab showing screen stack" />
 
 ```ts
 observeReactNavigation(navRef, { logger });
@@ -102,6 +110,8 @@ Display and control:
 - **Storage** — clear all logs and storage
 - **Health** — internal metrics (queue depth, dropped entries, etc.)
 - **Timeline** — breadcrumb crash trail (if configured)
+
+<img src="assets/panel-settings-1.png" width="280" alt="Settings tab appearance controls" /> <img src="assets/panel-settings-2.png" width="280" alt="Settings tab storage and health metrics" />
 
 ## Opening the Panel
 
@@ -137,12 +147,7 @@ import { useDebugPanel } from 'react-native-observability/panel';
 
 export function MyScreen() {
   const { openPanel, closePanel } = useDebugPanel();
-  return (
-    <Button
-      onPress={() => openPanel('logs')}
-      title="📊 Open Debug Panel"
-    />
-  );
+  return <Button onPress={() => openPanel('logs')} title="📊 Open Debug Panel" />;
 }
 ```
 
@@ -314,12 +319,14 @@ The Network tab's **Rules** section lets you create, edit, toggle, and delete mo
 
 Tapping a rule row (or **+ Add rule**) opens the Rule Details editor — a sectioned form inspired by Android Studio's Network Inspector:
 
-| Section | What it contains |
-|---|---|
-| **Match** | HTTP method chips (ANY / GET / POST …) + URL pattern field + optional inline pattern tester |
-| **Action** | Segmented control: Respond · Modify Req · Modify Res · Block · Fault |
-| **Configuration** | Fields relevant to the selected action only (status, headers, body, delay, fault type) |
-| **Advanced** | Collapsed by default — holds less-common fields such as request URL/method overrides and intermittent fault cadence |
+<img src="assets/panel-network-rules-1.png" width="280" alt="Network rules editor" /> <img src="assets/panel-network-rules-2.png" width="280" alt="Network rules configuration" />
+
+| Section           | What it contains                                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Match**         | HTTP method chips (ANY / GET / POST …) + URL pattern field + optional inline pattern tester                         |
+| **Action**        | Segmented control: Respond · Modify Req · Modify Res · Block · Fault                                                |
+| **Configuration** | Fields relevant to the selected action only (status, headers, body, delay, fault type)                              |
+| **Advanced**      | Collapsed by default — holds less-common fields such as request URL/method overrides and intermittent fault cadence |
 
 **URL pattern types** (shown as a live hint beneath the field):
 
@@ -335,13 +342,13 @@ Tapping a rule row (or **+ Add rule**) opens the Rule Details editor — a secti
 
 **Action reference**:
 
-| Action | Effect |
-|---|---|
-| **Respond** | Returns a canned status/headers/body, skipping the network entirely. |
-| **Modify Request** | Mutates headers/body (and optionally method/URL via Advanced) before the real request goes out. |
-| **Modify Response** | Transforms the real response's status/headers/body before the app sees it. |
-| **Block** | Rejects the request immediately with a synthetic network error. |
-| **Fault** | Injects a Timeout (hangs then fails after a configurable delay) or Disconnect (immediate network error). Use **Advanced → Inject every Nth match** for intermittent failure simulation. |
+| Action              | Effect                                                                                                                                                                                  |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Respond**         | Returns a canned status/headers/body, skipping the network entirely.                                                                                                                    |
+| **Modify Request**  | Mutates headers/body (and optionally method/URL via Advanced) before the real request goes out.                                                                                         |
+| **Modify Response** | Transforms the real response's status/headers/body before the app sees it.                                                                                                              |
+| **Block**           | Rejects the request immediately with a synthetic network error.                                                                                                                         |
+| **Fault**           | Injects a Timeout (hangs then fails after a configurable delay) or Disconnect (immediate network error). Use **Advanced → Inject every Nth match** for intermittent failure simulation. |
 
 For practical recipes — mocking any endpoint, forcing 400/500 errors, simulating timeouts, injecting auth headers — see the **[Network Rules guide](./network-rules.md)**.
 
@@ -351,7 +358,7 @@ Always conditionally enable:
 
 ```tsx
 <DebugPanelProvider
-  enabled={__DEV__}  // disabled in production
+  enabled={__DEV__} // disabled in production
 >
   <App />
 </DebugPanelProvider>
@@ -376,7 +383,7 @@ Don't log extremely large objects to the panel:
 logger.info('User data', { id: userId, email: userEmail });
 
 // ✗ Poor
-logger.info('User data', entireUserObject);  // huge JSON in panel
+logger.info('User data', entireUserObject); // huge JSON in panel
 ```
 
 ### Use Appropriate Tabs

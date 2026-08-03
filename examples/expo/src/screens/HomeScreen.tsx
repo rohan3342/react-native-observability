@@ -67,7 +67,7 @@ export function HomeScreen() {
   return (
     <Screen>
       <Hero
-        icon="observability"
+        icon="telescope"
         title="Observability showcase"
         subtitle="Multi-screen demo. Each tab tags its logs + network with its screen — open the panel and try the SCREEN filter. Tap the top-right corner 5× to open the panel."
         cta="Open debug panel"

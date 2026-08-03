@@ -8,7 +8,7 @@
 A production-grade, provider-agnostic observability and debugging toolkit for React Native. Structured logging, optional remote backends, crash capture, PII redaction, on-device debug panel, and first-party integrations for HTTP clients and navigation — all with **zero forced runtime dependencies**.
 
 <div align="center">
-  <video src="./docs/assets/preview.mov" width="320" controls autoplay muted loop></video>
+  <img src="./docs/assets/preview.mov" width="320" />
 </div>
 
 ```bash

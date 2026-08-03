@@ -8,18 +8,7 @@
 A production-grade, provider-agnostic observability and debugging toolkit for React Native. Structured logging, optional remote backends, crash capture, PII redaction, on-device debug panel, and first-party integrations for HTTP clients and navigation — all with **zero forced runtime dependencies**.
 
 <div align="center">
-  <table>
-    <tr>
-      <td align="center"><strong>Logs Tab</strong><br/><img src="./docs/assets/panel-logs-1.png" width="180" alt="Logs tab showing structured log entries with filtering"/></td>
-      <td align="center"><strong>Network Tab</strong><br/><img src="./docs/assets/panel-network-1.png" width="180" alt="Network tab with HTTP requests and response inspection"/></td>
-      <td align="center"><strong>Settings Tab</strong><br/><img src="./docs/assets/panel-settings-1.png" width="180" alt="Settings tab with theme, session, and storage controls"/></td>
-    </tr>
-    <tr>
-      <td align="center"><strong>Network Rules</strong><br/><img src="./docs/assets/panel-network-rules-1.png" width="180" alt="Network rules editor for mocking and fault injection"/></td>
-      <td align="center"><strong>State Inspection</strong><br/><img src="./docs/assets/panel-state-1.png" width="180" alt="State tab displaying app state with JSON syntax highlighting"/></td>
-      <td align="center"><strong>Navigation Tracking</strong><br/><img src="./docs/assets/panel-navigation-1.png" width="180" alt="Navigation tab showing screen stack and transitions"/></td>
-    </tr>
-  </table>
+  <video src="./docs/assets/preview.mov" width="320" controls autoplay muted loop></video>
 </div>
 
 ```bash
